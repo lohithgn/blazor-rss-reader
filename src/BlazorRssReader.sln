@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27729.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorRssReader", "BlazorRssReader\BlazorRssReader.csproj", "{54BA9B2F-2F66-4736-9944-BF59EFB94A1A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{54BA9B2F-2F66-4736-9944-BF59EFB94A1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54BA9B2F-2F66-4736-9944-BF59EFB94A1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54BA9B2F-2F66-4736-9944-BF59EFB94A1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54BA9B2F-2F66-4736-9944-BF59EFB94A1A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5A2B32D4-29CC-42BF-93F3-FFAD0D9DD6CC}
+	EndGlobalSection
+EndGlobal

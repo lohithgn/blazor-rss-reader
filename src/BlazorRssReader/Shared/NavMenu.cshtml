@@ -1,0 +1,50 @@
+﻿<div class="sidebar">
+    <div class="sidebar-header">
+        <div>
+            <a class="btn btn-sm btn-primary btn-block" href="/add">+ Add Feed</a>
+        </div>
+        <div class="mt-2">
+            <div class="float-left">
+                <small>FEEDS</small>
+            </div>
+            <div class="float-right">
+                <a href="/organize"><i class="icons d-block icon-settings pr-1 mt-1"></i></a>
+            </div>
+        </div>
+    </div>
+    <nav class="sidebar-nav">
+        @if (Feeds == null || Feeds.Count == 0)
+        {
+            <div class="row mt-3">
+                <div class="col">
+                    <p class="text-center">No feeds</p>
+                </div>
+            </div>
+        }
+        else
+        {
+
+            <ul class="nav" style="line-height:0">
+                @foreach (var item in Feeds)
+                {
+                    <li class="nav-item" style="overflow:hidden;white-space:nowrap">
+                        <a class="nav-link" title="@item.Title" href="/feed/@item.Id" style="text-overflow:clip">
+                            @if (item.ImageUrl != null)
+                            {
+                                <img src="@item.ImageUrl" width="15" height="15" class="mr-1" />
+                            }
+                            else
+                            {
+                                <i class="nav-icon icon-feed mr-1"></i>
+                            } <small>@item.Title</small>
+                        </a>
+                    </li>
+                }
+            </ul>
+        }
+    </nav>
+</div>
+
+@functions{
+    [Parameter] protected List<Feed> Feeds { get; set; }
+}

@@ -1,0 +1,16 @@
+﻿<div ref="HtmlContentDiv"></div>
+
+@functions{
+
+    [Parameter] string Content { get; set; }
+
+    private ElementRef HtmlContentDiv;
+
+    protected override void OnAfterRender()
+    {
+        if (!string.IsNullOrEmpty(Content))
+        {
+            RegisteredFunction.Invoke<bool>("RawHtml", HtmlContentDiv, Content);
+        }
+    }
+}

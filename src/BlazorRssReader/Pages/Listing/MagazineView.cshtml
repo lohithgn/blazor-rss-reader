@@ -1,0 +1,36 @@
+﻿@foreach (var item in Items)
+{
+    <div class="row" onclick="@(()=>OnClick(item))" style="cursor:pointer">
+        <div class="col-md-2">
+            @if (!string.IsNullOrEmpty(item.ImageUrl))
+            {
+                <img src="@item.ImageUrl" class="rounded img-thumbnail" />
+            }
+        </div>
+        <div class="col-md-8">
+            <div class="mb-2"><b>@item.Title</b></div>
+            <div class="mb-2 text-muted">@item.PublishDate.ToString("dd MMM")</div>
+            <div class="mb-2 text-muted">@item.Summary.Truncate(230)</div>
+        </div>
+        <div class="col-md-2">
+
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="col-md-12">
+            <hr/>
+        </div>
+    </div>
+}
+
+@functions{
+    [Parameter] List<RssSchema> Items { get; set; }
+
+    [Parameter] Action<RssSchema> OnItemClicked { get; set; }
+
+    void OnClick(RssSchema item)
+    {
+        OnItemClicked?.Invoke(item);
+    }
+}
+

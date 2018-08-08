@@ -1,0 +1,27 @@
+﻿@foreach (var item in Items)
+{
+    <div class="row">
+        <div class="col-sm-12">
+            <hr class="mb-1 mt-1"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-11" onclick="@(()=>OnClick(item))" style="cursor:pointer;overflow:hidden;white-space:nowrap">
+            <small style="text-overflow:clip"><b>@item.Title</b> @item.Summary</small>
+        </div>
+        <div class="col-sm-1">
+            <small>@item.PublishDate.ToString("MMM dd")</small>
+        </div>
+    </div>
+}
+
+@functions{
+    [Parameter] List<RssSchema> Items { get; set; }
+
+    [Parameter] Action<RssSchema> OnItemClicked { get; set; }
+
+    void OnClick(RssSchema item)
+    {
+        OnItemClicked?.Invoke(item);
+    }
+}

@@ -1,0 +1,38 @@
+﻿@page "/entry/{EntryId}"
+@inherits DetailsModel
+
+<nav aria-label="breadcrumb" class="mt-3">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/feed/@Session.SelectedFeed.Id">@Session.SelectedFeed.Title</a></li>
+        <li class="breadcrumb-item active" aria-current="page">@Session.SelectedEntry.Title</li>
+    </ol>
+</nav>
+
+<div class="row mt-3 ml-5 mr-5">
+    <div class="col-md-12">
+        <a href="@Session.SelectedEntry.FeedUrl" target="_blank"><h1>@Session.SelectedEntry.Title</h1></a>
+        <small class="text-muted">
+            @Session.SelectedFeed.Title by @Session.SelectedEntry.Author
+            /
+            @Session.SelectedEntry.PublishDate.ToString("dd MMM")
+        </small>
+    </div>
+</div>
+
+<div class="row mt-3 ml-5 mr-5 border rounded">
+    <div class="col-md-12 p-2">
+        <ShareButtons Url="@Session.SelectedEntry.FeedUrl" Title="@Session.SelectedEntry.Title"></ShareButtons>
+    </div>
+</div>
+
+<div class="row mt-3 ml-5 mr-5">
+    <div class="col-md-12">
+        <HtmlView Content="@Session.SelectedEntry.Content"></HtmlView>
+    </div>
+</div>
+
+<div class="row mt-3 ml-5 mr-5 mb-5">
+    <div class="col-md-12">
+        <a href="@Session.SelectedEntry.FeedUrl" target="_blank" class="btn btn-light btn-block">VISIT WEBSITE</a>
+    </div>
+</div>

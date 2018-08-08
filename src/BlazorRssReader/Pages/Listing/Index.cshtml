@@ -1,0 +1,69 @@
+﻿@page "/feed/{FeedId}"
+@inherits IndexModel
+
+@if (IsBusy)
+{
+    <p class="m-3">Loading feed ...</p>
+}
+else
+{
+    @if (Feed != null)
+    {
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                @Feed.Title
+            </li>
+        </ol>
+        <div class="row mt-3 mb-3 ml-3">
+            <div class="col">
+                <h1>@Feed.Title</h1>
+                <small>@Feed.Description</small>
+            </div>
+            <div class="col-sm-3">
+                <div class="float-right mr-4">
+                    <div class="btn btn-light" title="Refresh" onclick="@OnRefreshFeed">
+                        <span class="icon-reload icons"></span>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-light @(ViewType=="Title" ? "active" : null)" title="Title Only View" onclick="@OnTitleViewClick">
+                            <input type="radio" name="options" id="option1" autocomplete="off" checked> <span class="icon-menu icons"></span>
+                        </label>
+                        <label class="btn btn-light @(ViewType=="Magazine" ? "active" : null)" title="Magazine View" onclick="@OnMagazineViewClick">
+                            <input type="radio" name="options" id="option2" autocomplete="off"> <span class="icons icon-list"></span>
+                        </label>
+                        <label class="btn btn-light @(ViewType=="Cards" ? "active" : null)" title="Cards View" onclick="@OnCardsViewClick">
+                            <input type="radio" name="options" id="option3" autocomplete="off"> <span class="icons icon-grid"></span>
+                        </label>
+                        <label class="btn btn-light @(ViewType=="Article" ? "active" : null)" title="Article View" onclick="@OnArticleViewClick">
+                            <input type="radio" name="options" id="option3" autocomplete="off"> <span class="icons icon-doc"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    <div class="container-fluid">
+        <div class="animated fadeIn">
+
+            @if (FeedItems != null)
+            {
+                @if (ViewType == "Title")
+                {
+                    <TitleView Items="@FeedItems" OnItemClicked="@OnFeedItemClick"></TitleView>
+                }
+                @if (ViewType == "Magazine")
+                {
+                    <MagazineView Items="@FeedItems" OnItemClicked="@OnFeedItemClick"></MagazineView>
+                }
+                @if (ViewType == "Cards")
+                {
+                    <CardsView Items="@FeedItems" OnItemClicked="@OnFeedItemClick"></CardsView>
+                }
+                @if (ViewType == "Article")
+                {
+                    <ArticleView Items="@FeedItems"></ArticleView>
+                }
+            }
+        </div>
+    </div>
+}

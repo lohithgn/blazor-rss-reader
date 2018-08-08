@@ -1,0 +1,31 @@
+﻿@using Microsoft.Toolkit.Parsers
+
+<div class="card-columns">
+    @foreach (var item in Items)
+    {
+        <div class="card rounded" onclick="@(()=>OnClick(item))" style="cursor:pointer">
+            <div class="card-body">
+                <div style="height:182px;background:#EEE">
+                    @if (!string.IsNullOrEmpty(item.ImageUrl))
+                    {
+                        <img class="card-img-top mb-3" src="@item.ImageUrl" alt="@item.Title" height="182">
+                    }
+                </div>
+                <b class="card-title mb-3">@item.Title.Truncate(75)</b>
+                <p class="card-text">@item.Summary.Truncate(127)</p>
+                <p class="card-text">@item.PublishDate.ToString("dd MMM")</p>
+            </div>
+        </div>
+    }
+</div>
+
+@functions{
+    [Parameter] List<RssSchema> Items { get; set; }
+
+    [Parameter] Action<RssSchema> OnItemClicked { get; set; }
+
+    void OnClick(RssSchema item)
+    {
+        OnItemClicked?.Invoke(item);
+    }
+}

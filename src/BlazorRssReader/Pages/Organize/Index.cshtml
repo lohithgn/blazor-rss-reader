@@ -1,0 +1,70 @@
+﻿@page "/organize"
+@inherits IndexModel
+
+
+@if (IsBusy)
+{
+    <p>Loading feeds ...</p>
+}
+else
+{
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            Oranize
+        </li>
+    </ol>
+    <div class="row mt-3 mb-3 ml-3">
+        <div class="col">
+            <h1>Organize Sources</h1>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="animated fadeIn">
+            @if (Feeds.Count > 0)
+            {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Website</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var feed in Feeds)
+                    {
+                        <tr>
+                            <td>
+                                @if (feed.ImageUrl != null)
+                                {
+                                    <img src="@feed.ImageUrl" width="40" height="40" class="float-left mr-2" />
+                                }
+                                else
+                                {
+                                    <div style="width:40px;height:40px;" class="rounded bg-light float-left pt-2 pl-2 mr-2">
+                                        <b class="pl-2 mt-2 text-center">@feed.Title.Substring(0, 1)</b>
+                                    </div>
+                                }
+                                <b class="float-left pt-2">@feed.Title</b>
+                            </td>
+                            <td>
+                                <a class="float-left pt-2" href="@feed.WebsiteUrl" target="_blank">@feed.WebsiteUrl</a>
+                            </td>
+                            <td>
+                                <div class="float-left pt-2">
+                                    <a href="/organize/edit/@feed.Id"><i class="icon-pencil icons pl-2" title="Edit feed"></i></a>
+                                    <a href="javascript:void(0)" onclick="@(async () => await OnUnfollowFeed(feed.Id))"><i class="icon-trash icons pl-2" title="Unfollow feed" ></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            }
+            else
+            {
+                <h4>No entries.</h4>
+            }
+        </div>
+    </div>
+}

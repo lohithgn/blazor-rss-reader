@@ -1,0 +1,40 @@
+﻿@page "/organize/edit/{FeedId}"
+@inherits EditModel
+@if (IsBusy)
+{
+    <p>Loading feed ...</p>
+}
+else
+{
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="/organize">Oranize</a>
+        </li>
+        <li class="breadcrumb-item">
+            Edit
+        </li>
+    </ol>
+    <div class="row mt-3 mb-3 ml-3">
+        <div class="col">
+            <h1>Edit feed</h1>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-lg-6">
+                    <form>
+                        <div class="form-group">
+                            <label for="title">Title <small>(required)</small></label>
+                            <input type="text" class="form-control form-control-lg" id="title" bind="@FeedTitle" />
+                        </div>
+                        <div>
+                            <button class="btn btn-success mb-2" onclick="@OnSaveClick">Save</button>
+                            <a href="/organize" class="btn btn-light mb-2">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+}

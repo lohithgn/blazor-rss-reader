@@ -1,0 +1,29 @@
+@inherits MainLayoutModel
+
+<header class="app-header navbar navbar-dark bg-dark">
+    <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="#">
+        Blazor Reader
+    </a>
+    <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <ul class="nav navbar-nav ml-auto">
+        <li class="nav-item dropdown">
+            <a class="nav-link pr-5" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                Built with Blazor
+            </a>
+        </li>
+        <li class="nav-item dropdown"></li>
+    </ul>
+</header>
+
+<div class="app-body">
+    <NavMenu Feeds="@MenuItems"></NavMenu>
+    <main class="main">
+        @Body
+
+    </main>
+</div>

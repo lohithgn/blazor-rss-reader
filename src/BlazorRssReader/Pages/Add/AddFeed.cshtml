@@ -1,0 +1,80 @@
+﻿@page "/add"
+@inherits AddFeedModel
+
+<div class="container">
+    <div class="row mt-5 mb-5">
+        <div class="col-lg-12">
+            <h2>Add Feed</h2>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col-lg-12">
+            <h6>What feed do you want to follow ?</h6>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-10">
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <i class="icons icon-magnifier"></i>
+                    </div>
+                </div>
+                <input type="text" class="form-control" placeholder="place a feed URL" bind="@FeedUrl" />
+            </div>
+        </div>
+        <div class="col-lg-2">
+            <button class="btn btn-primary" onclick="@OnCheckFeed">Check Feed</button>
+        </div>
+    </div>
+    @if (IsBusy)
+    {
+        <div class="row">
+            <div class="col-lg-12">
+                Loading...
+            </div>
+        </div>
+    }
+    @if (IsError)
+    {
+        <div class="row">
+            <div class="col-lg-12 mt-3 mb-3">
+                <h6>Error parsing feed. Please try again</h6>
+            </div>
+        </div>
+    }
+    @if (Feed != null)
+    {
+        <div class="row">
+            <div class="col-lg-12 mt-4 mb-2">
+                <h6>Feed source details:</h6>
+            </div>
+        </div>
+        <div class="row mt-3">
+            @if (!string.IsNullOrEmpty(Feed.ImageUrl))
+            {
+                <div class="col-lg-1">
+                    <img src="@Feed.ImageUrl" width="60" height="60" />
+                </div>
+            }
+            <div class="col-lg-11">
+                <h3>@Feed.Title</h3>
+                <p class="mt-3">
+                    <h6 class="text-muted">@Feed.Description</h6>
+                </p>
+                <p class="mt-3">
+                    @foreach (var item in Feed.Items)
+                    {
+                        <a class="text-muted" href="@item.Url" target="_blank">@item.Title</a><br />
+                    }
+                </p>
+            </div>
+
+        </div>
+        <div class="row mt-3">
+            <div class="col-lg-12">
+                <button class="btn btn-primary" onclick="@OnFollowFeed">Follow feed</button>
+            </div>
+        </div>
+    }
+</div>

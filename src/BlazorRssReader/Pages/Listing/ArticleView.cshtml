@@ -1,0 +1,46 @@
+﻿@using Microsoft.Toolkit.Parsers
+
+@foreach (var item in Items)
+{
+    <div class="row mb-4">
+        <div class="col">
+            <div class="card rounded">
+                <div class="card-body">
+                    <h5>
+                        <b>@item.Title</b>
+                    </h5>
+                    <div>
+                        <small>
+                            @if (!string.IsNullOrEmpty(item.Author))
+                            {
+                                <span>@item.Author /</span>
+                            }
+                            @item.PublishDate.ToString("dd MMM yyyy")
+                        </small>
+                    </div>
+                    <div class="mt-3 border rounded">
+                        <div class="p-2">
+                            <ShareButtons Url="@item.FeedUrl" Title="@item.Title"></ShareButtons>
+                        </div>
+                    </div>
+                    @if (!string.IsNullOrEmpty(item.ExtraImageUrl))
+                    {
+                        <div class="mt-3">
+                            <img class="card-img-top" src="@item.ExtraImageUrl" alt="@item.Title" height="182">
+                        </div>
+                    }
+                    <div class="mt-3">
+                        <HtmlView Content="@item.Content"></HtmlView>
+                    </div>
+                </div>
+                <div class="ml-3 mr-3 mb-3">
+                    <a class="btn btn-sm btn-light btn-block" href="@item.FeedUrl" target="_blank">VISIT WEBSITE</a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@functions{
+    [Parameter] List<RssSchema> Items { get; set; }
+}

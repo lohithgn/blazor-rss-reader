@@ -1,0 +1,38 @@
+﻿<a class="btn btn-light" href="http://bufferapp.com/add?text=@Title&url=@Url" title="Share to Buffer" target="bufferwind">
+    <i class="icons icon-layers"></i>
+</a>
+<button class="btn btn-light" title="Copy link to clipboard" ref="CopyToClipButton" data-clipboard-text="@Url" onclick="@CopyToClipboard">
+    <i class="icons icon-link"></i>
+</button>
+<a class="btn btn-light" href="mailto:?subject=@Title&body=@Url" title="Share via Email" target="mailwind">
+    <i class="icons icon-envelope"></i>
+</a>
+<a class="btn btn-light" href="https://www.facebook.com/sharer/sharer.php?t=@Title&u=@Url" title="Share to Facebook" target="fbwind">
+    <i class="icons icon-social-facebook"></i>
+</a>
+<a class="btn btn-light" href="https://www.linkedin.com/shareArticle?mini=true&url=@Url&title=@Title&summary=@Title&source=blazoreader" title="Share to Linkedin" target="linkedinwind">
+    <i class="icons icon-social-linkedin"></i>
+</a>
+<a class="btn btn-light" href="https://twitter.com/intent/tweet?url=@Url&text=@Title&hashtags=blazoreader" title="Share to Twiter" target="twitterwind">
+    <i class="icons icon-social-twitter"></i>
+</a>
+<a class="btn btn-light" href="https://plus.google.com/share?url=@Url" title="Share to Google" target="googlewind">
+    <i class="icons icon-social-google"></i>
+</a>
+<a class="btn btn-light" href="https://hootsuite.com/hootlet/social-share?url=@Url&title=@Title" title="Share to Hootsuite" target="hootwind">
+    <img src="images/hootsuite.png" width="20" height="20" />
+</a>
+
+@functions{
+
+    [Parameter] string Url { get; set; }
+
+    [Parameter] string Title { get; set; }
+
+    private ElementRef CopyToClipButton;
+
+    void CopyToClipboard()
+    {
+        RegisteredFunction.Invoke<bool>("CopyToClip", CopyToClipButton, null);
+    }
+}
