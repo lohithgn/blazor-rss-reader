@@ -2,7 +2,7 @@
 A simple RSS reader sample application built using Blazor V0.4.0 (https://blazor.net). Note: Blazor is a experimental tech from Microsoft
 
 # Live Site
-Blazor RSS Reader is hosted on Azure and the here is the link to Live Demo - [https://gnl.me/blazorrssreader](https://gnl.me/blazorrssreader)
+Blazor RSS Reader is hosted on Azure and the here is the link to Live Demo - [https://blazorrssreader.surge.sh](https://blazorrssreader.surge.sh)
 
 # Screen Shots
 
