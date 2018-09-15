@@ -1,0 +1,10 @@
+{
+  "name": "blazorrssreader",
+  "version": "1.0.0",
+  "description": "Blazor RSS Reader",
+  "author": "kashyapa",
+  "license": "MIT",
+  "devDependencies": {
+    "surge": "0.20.1"
+  }
+}
