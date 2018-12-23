@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Blazor.Components;
 using Microsoft.AspNetCore.Blazor.Layouts;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BlazorRssReader.Shared
 {
@@ -13,21 +14,21 @@ namespace BlazorRssReader.Shared
         [Inject] private FeedService FeedService { get; set; }
         public List<Feed> MenuItems { get; set; }
 
-        protected override void OnInit()
+        protected override async Task OnInitAsync()
         {
             NotificationService.OnFeedUpdated += UpdateFeeds;
-            LoadMenuItems();
+            await LoadMenuItems();
         }
 
-        private void UpdateFeeds()
+        private async Task UpdateFeeds()
         {
-            LoadMenuItems();
+            await LoadMenuItems();
             StateHasChanged();
         }
 
-        private void LoadMenuItems()
+        private async Task LoadMenuItems()
         {
-            MenuItems = FeedService.GetFeeds();
+            MenuItems = await FeedService.GetFeeds();
         }
 
         public void Dispose()

@@ -1,13 +1,14 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace BlazorRssReader.Services
 {
     public class NotificationService
     {
-        public event Action OnFeedUpdated;
-        public void NotifyFeedChange()
+        public event Func<Task> OnFeedUpdated;
+        public async Task NotifyFeedChange()
         {
-            OnFeedUpdated?.Invoke();
+            await OnFeedUpdated?.Invoke();
         }
     }
 }

@@ -27,9 +27,9 @@ namespace BlazorRssReader.Pages.Organize
 
         private async Task LoadFeedsAsync()
         {
-            await Task.Run(() =>
+            await Task.Run(async () =>
                   {
-                        Feeds = Service.GetFeeds();
+                        Feeds = await Service.GetFeeds();
                   });
         }
 
@@ -37,7 +37,7 @@ namespace BlazorRssReader.Pages.Organize
         {
             Logger.LogInformation("feed id {feedId}", feedId);
             await Service.DeleteFeed(feedId);
-            NotificationService.NotifyFeedChange();
+            await NotificationService.NotifyFeedChange();
             await LoadFeedsAsync();
         }
     }

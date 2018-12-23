@@ -31,8 +31,8 @@ namespace BlazorRssReader.Pages.Listing
 
             IsBusy = true;
             ClearFeedItems();
-            SetViewType();
-            LoadFeedDetails();
+            await SetViewType();
+            await LoadFeedDetails();
             await LoadFeedItems();
             IsBusy = false;
         }
@@ -43,9 +43,9 @@ namespace BlazorRssReader.Pages.Listing
             Session.SelectedFeedItems = null;
         }
 
-        private void SetViewType()
+        private async Task SetViewType()
         {
-            var viewType = Storage.GetItem<string>("blazor.rss.viewtype");
+            var viewType = await Storage.GetItem<string>("blazor.rss.viewtype");
             ViewType = string.IsNullOrEmpty(viewType) ? "Title" : viewType;
         }
 
@@ -103,9 +103,9 @@ namespace BlazorRssReader.Pages.Listing
             }
         }
 
-        private void LoadFeedDetails()
+        private async Task LoadFeedDetails()
         {
-            Feed = FeedService.GetFeedDetails(FeedId);
+            Feed = await FeedService.GetFeedDetails(FeedId);
         }
 
       

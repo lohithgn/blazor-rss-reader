@@ -42,7 +42,7 @@ namespace BlazorRssReader.Pages.Add
         public async Task OnFollowFeed()
         {
             await FeedService.AddFeed(Feed);
-            NotificationService.NotifyFeedChange();
+            await NotificationService.NotifyFeedChange();
             UriHelper.NavigateTo($"/feed/{Feed.Id}");
         }
     }

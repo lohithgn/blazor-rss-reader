@@ -27,15 +27,15 @@ namespace BlazorRssReader.Services
             _localStorage = localStorage;
         }
 
-        public List<Feed> GetFeeds()
+        public async Task<List<Feed>> GetFeeds()
         {
-            var feeds = _localStorage.GetItem<List<Feed>>("blazor.rss.feeds") ?? new List<Feed>();
+            var feeds = await _localStorage.GetItem<List<Feed>>("blazor.rss.feeds") ?? new List<Feed>();
             return feeds;
         }
 
-        public Feed GetFeedDetails(string feedId)
+        public async Task<Feed> GetFeedDetails(string feedId)
         {
-            var feeds = GetFeeds();
+            var feeds = await GetFeeds();
             var feed = feeds.SingleOrDefault(f => f.Id.ToString() == feedId);
             return feed;
         }
@@ -91,31 +91,31 @@ namespace BlazorRssReader.Services
 
         public async Task AddFeed(Feed feed)
         {
-            await Task.Run(() =>
+            await Task.Run(async () =>
             {
                 feed.Items = null;
-                var existingFeeds = GetFeeds();
+                var existingFeeds = await GetFeeds();
                 existingFeeds.Add(feed);
-                _localStorage.SetItem("blazor.rss.feeds", existingFeeds);
+                await _localStorage.SetItem("blazor.rss.feeds", existingFeeds);
             }).ConfigureAwait(false);
         }
 
-        public void UpdateFeed(string feedId, string feedTitle)
+        public async Task  UpdateFeed(string feedId, string feedTitle)
         {
-            var feeds = GetFeeds();
+            var feeds = await GetFeeds();
             var feed = feeds.SingleOrDefault(f => f.Id.ToString() == feedId);
             feed.Title = feedTitle;
-            _localStorage.SetItem("blazor.rss.feeds", feeds);
+            await _localStorage.SetItem("blazor.rss.feeds", feeds);
         }
 
         public async Task DeleteFeed(Guid feedId)
         {
-            await Task.Run(() =>
+            await Task.Run(async () =>
             {
-                var existingFeeds = GetFeeds();
+                var existingFeeds = await GetFeeds();
                 var feedToDelete = existingFeeds.SingleOrDefault(f => f.Id == feedId);
                 existingFeeds.Remove(feedToDelete);
-                _localStorage.SetItem("blazor.rss.feeds", existingFeeds);
+                await _localStorage.SetItem("blazor.rss.feeds", existingFeeds);
             }).ConfigureAwait(false);
         }
 
