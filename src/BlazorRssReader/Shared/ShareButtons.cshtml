@@ -31,8 +31,8 @@
 
     private ElementRef CopyToClipButton;
 
-    void CopyToClipboard()
+    Task CopyToClipboard()
     {
-        RegisteredFunction.Invoke<bool>("CopyToClip", CopyToClipButton, null);
+        return JSRuntime.Current.InvokeAsync<bool>("blazorRssReaderFunctions.CopyToClip", CopyToClipButton, null);
     }
 }

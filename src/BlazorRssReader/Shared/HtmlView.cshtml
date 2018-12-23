@@ -6,11 +6,12 @@
 
     private ElementRef HtmlContentDiv;
 
-    protected override void OnAfterRender()
+    protected override Task OnAfterRenderAsync()
     {
         if (!string.IsNullOrEmpty(Content))
         {
-            RegisteredFunction.Invoke<bool>("RawHtml", HtmlContentDiv, Content);
+            return JSRuntime.Current.InvokeAsync<bool>("blazorRssReaderFunctions.RawHtml", HtmlContentDiv, Content);
         }
+        return Task.FromResult<bool>(false);
     }
 }

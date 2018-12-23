@@ -3,6 +3,7 @@ using BlazorRssReader.Services;
 using Microsoft.AspNetCore.Blazor.Components;
 using Microsoft.AspNetCore.Blazor.Services;
 using Microsoft.Extensions.Logging;
+using System.Threading.Tasks;
 
 namespace BlazorRssReader.Pages.Organize
 {
@@ -22,24 +23,24 @@ namespace BlazorRssReader.Pages.Organize
 
         private Feed feed;
 
-        protected override void OnInit()
+        protected override async Task OnInitAsync()
         {
             IsBusy = true;
-            LoadFeed();
+            await LoadFeed();
             IsBusy = false;
         }
 
-        private void LoadFeed()
+        private async Task LoadFeed()
         {
-            feed = FeedService.GetFeedDetails(FeedId);
+            feed = await FeedService.GetFeedDetails(FeedId);
             Logger.LogInformation("Feed {0}",feed);
             FeedTitle = feed.Title;
         }
 
-        public void OnSaveClick()
+        public async Task OnSaveClick()
         {
-            FeedService.UpdateFeed(FeedId, FeedTitle);
-            NotificationService.NotifyFeedChange();
+            await FeedService.UpdateFeed(FeedId, FeedTitle);
+            await NotificationService.NotifyFeedChange();
             UriHelper.NavigateTo("/organize");
         }
     }
